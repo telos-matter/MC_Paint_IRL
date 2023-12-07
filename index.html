@@ -1,10 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>MC Paint IRL</title>
-    </head>
-    <body>
-        <p>Hello, world!</p>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing</title>
+</head>
+<body>
+    <input type="file" id="uploadInput" accept="image/*">
+    <!-- <canvas id="imageCanvas" style="display:none;"></canvas> -->
+    <canvas id="imageCanvas"></canvas>
+
+    <script>
+        document.getElementById('uploadInput').addEventListener('change', handleFileSelect);
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+
+                    img.onload = function () {
+                        const canvas = document.getElementById('imageCanvas');
+                        const ctx = canvas.getContext('2d');
+
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+
+                        ctx.drawImage(img, 0, 0, img.width, img.height);
+
+                        // Get pixel values
+                        const imageData = ctx.getImageData(0, 0, img.width, img.height);
+                        const pixels = imageData.data;
+
+                        // Access pixel values (R, G, B, A) for a specific pixel (x, y)
+                        const x = 10; // Example x-coordinate
+                        const y = 20; // Example y-coordinate
+
+                        const index = (y * img.width + x) * 4;
+                        const red = pixels[index];
+                        const green = pixels[index + 1];
+                        const blue = pixels[index + 2];
+                        const alpha = pixels[index + 3];
+
+                        console.log('Pixel values at (' + x + ', ' + y + '):', red, green, blue, alpha);
+                    };
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
 </html>
