@@ -1,3 +1,5 @@
-# ![DEVELOPMENT STATUS: still working on it](https://badgen.net/badge/DEVELOPMENT%20STATUS/not%20yet%20functional/red)
+# ![DEVELOPMENT STATUS: working prototype](https://badgen.net/badge/DEVELOPMENT%20STATUS/working%20prototype/orange)
 
 A tool that helps you paint Minecraft paintings in real life.
+
+# [Link](https://telos-matter.github.io/MC_Paint_IRL/)
